@@ -42,12 +42,12 @@ jQuery.post("/api/persons/", {
 
 // update a person (also demonstrates name and email formatting)
 jQuery.ajax({
-    url: "/api/persons/54f6bde94f92d80814a26e07",
+    url: "/api/persons/54f7593f9d56e910076bb033",
     type: "PUT",
     data: {
-    "name" : {"firstName": "     sami- tApio", "lastName": "Vaittinen-Äikäs"},
+    "name" : {"firstName": "     sami-tApio", "lastName": "Vaittinen-Äikäs"},
     "email": "sami.vaiTTinen@animania.fi",
-    "ssn"  : "271173-0890",
+    "ssn"  : " 271173-0890 ",
     },
     success: function(data, textStatus, jqXHR) {
         console.log("PUT response:");
