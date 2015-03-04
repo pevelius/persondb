@@ -76,9 +76,8 @@ var PersonModel = mongoose.model("Person", personSchema);
 // 2-40 letters, possible dash between (Juha-Matti Siro-Kaunisto etc), i=ignore case
 // Foreign letters are not accepted for simplicity.
 function validateName (v) {
-    v = v.replace(/\s/g, '');
-    var pattern = /[a-z,å-ö]{1,20}[-]{0,1}[a-z,å-ö]{1,20}/i
-    if (!pattern.test(v))
+    var pattern = /^[a-z,åäö]{1,20}[-]{0,1}[a-z,åäö]{1,20}$/i
+    if (!pattern.test(v.trim()))
         return false;
     else
         return true;
@@ -100,10 +99,11 @@ function validateEmail (v) {
 // Date is checked with a funky way, but I think this approach works because of
 // the way the Date() constructor seems to be implemented.
 function validateFinnishSSN (v) {
- 
+    v = v.trim();
     // check structure of ssn with regex first
-    var pattern = /[0-9]{6}[+-A][0-9]{3}[0123456789ABCDEFHJKLMNPRSTUVWXY]/i;
-    if (!pattern.test(v)) return false;
+    var pattern = /^[0-9]{6}[+-A][0-9]{3}[0123456789ABCDEFHJKLMNPRSTUVWXY]$/i;
+    if (!pattern.test(v))
+        return false;
 
     // check that the date is valid.
     var intDate = makeIntDateFromSsn(v); 
@@ -159,11 +159,11 @@ PersonModel.schema.pre("save", function(next) {
 
 // MONGOOSE SETTERS AND GETTERS START HERE
 
-// First, get rid of all empty space in name.
+// First, get rid of empty space in the beginning and in the end.
 // Then Format name so that it begins with capital and the rest is lowerCase.
 // This takes care of names with a dash, too.
 function setName(v) {
-    v = v.replace(/\s/g, '');
+    v = v.trim();
     var name = "";
     var parts = v.split('-');
     for (i = 0 ; i < parts.length ; ++i) {
