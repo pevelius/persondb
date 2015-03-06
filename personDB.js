@@ -72,11 +72,10 @@ var PersonModel = mongoose.model("Person", personSchema);
 
 // MONGOOSE VALIDATION FUNCTIONS (CALLED ONE BY ONE BY MIDDLEWARE VALIDATOR)
 
-// First remove all whitespace.
 // 2-40 letters, possible dash between (Juha-Matti Siro-Kaunisto etc), i=ignore case
 // Foreign letters are not accepted for simplicity.
 function validateName (v) {
-    var pattern = /^[a-z,åäö]{1,20}[-]{0,1}[a-z,åäö]{1,20}$/i
+    var pattern = /^[a-z|åäö]{1,20}[-]{0,1}[a-z|åäö]{1,20}$/i
     if (!pattern.test(v.trim()))
         return false;
     else

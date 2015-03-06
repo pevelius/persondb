@@ -28,11 +28,11 @@ jQuery.get("/api/persons/54f6b44ee242c95007cdf0c3",
     console.dir(jqXHR);
 });
 
-// create a valid person Sami Vaittinen
+// create a valid person Timo Testaaja
 jQuery.post("/api/persons/", {
-    "name" : {"firstName": "Sami", "lastName": "Vaittinen"},
-    "email": "sami.vaittinen@gmail.com",
-    "ssn"  : "271173-0890",
+    "name" : {"firstName": "Timo", "lastName": "Testaaja"},
+    "email": "timo.testaaja@testiosoite.com",
+    "ssn"  : "210772-5716",
 }, function(data, textStatus, jqXHR) {
     console.log("Get response:");
     console.dir(data);
@@ -45,9 +45,9 @@ jQuery.ajax({
     url: "/api/persons/54f7593f9d56e910076bb033",
     type: "PUT",
     data: {
-    "name" : {"firstName": "     sami-tApio", "lastName": "Vaittinen-Äikäs"},
-    "email": "sami.vaiTTinen@animania.fi",
-    "ssn"  : " 271173-0890 ",
+    "name" : {"firstName": "     timo-pEkka", "lastName": "Testaaja-Koodaaja"},
+    "email": "timo.tEstaaja@tEstiosOite.com",
+    "ssn"  : " 210772-5716 ",
     },
     success: function(data, textStatus, jqXHR) {
         console.log("PUT response:");
